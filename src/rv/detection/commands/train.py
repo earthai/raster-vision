@@ -114,13 +114,14 @@ def train(config_uri, train_dataset_uri, val_dataset_uri, model_checkpoint_uri,
         # After training finishes due to num_steps exceeded,
         # kill monitor processes, export inference graph, and upload.
         train_process.wait()
-        eval_process.kill()
-        tensorboard_process.kill()
+        eval_process.wait()
+        tensorboard_process.wait()
+        '''
         export_inference_graph(
             train_root_dir, config_path, inference_graph_path)
         if urlparse(train_uri).scheme == 's3':
             sync_dir(train_root_dir, train_uri, delete=True)
-
+        '''
 
 if __name__ == '__main__':
     train()

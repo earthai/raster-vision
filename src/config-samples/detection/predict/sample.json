@@ -1,0 +1,7 @@
+{
+    "mask_uri": null,
+    "channel_order": [0, 1, 2],
+    "chip_size": 300,
+    "score_thresh": 0.5,
+    "merge_thresh": 0.5
+}

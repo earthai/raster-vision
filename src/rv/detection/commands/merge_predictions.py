@@ -35,7 +35,7 @@ def merge_predictions(projects_uri, output_dir_uri, save_temp):
             projects = json.load(projects_file)
             for project in enumerate(projects):
                 predictions_list = []
-                for image_ind, image in enumerate(projects['images']):
+                for image_ind, image in enumerate(project['images']):
                     predictions_uri = os.path.join(
                         output_dir_uri, project['id'],
                         '{}.json'.format(image_ind))

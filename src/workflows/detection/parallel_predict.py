@@ -48,16 +48,17 @@ def parallel_predict(projects_uri, label_map_uri, inference_graph_uri,
         # Submit an array job with nb_images elements.
         command = make_predict_array_cmd(
             inference_graph_uri, label_map_uri, projects_uri, output_dir_uri)
+        '''
         predict_job_id = _batch_submit(
             branch_name, command, attempts=attempts, cpu=cpu,
             array_size=nb_images)
-
+        '''
         # Submit a dependent merge_predictions job.
         command = make_merge_predictions_cmd(
             projects_uri, output_dir_uri)
         _batch_submit(
-            branch_name, command, attempts=attempts, cpu=cpu,
-            parent_job_ids=[predict_job_id])
+            branch_name, command, attempts=attempts, cpu=cpu)
+            #parent_job_ids=[predict_job_id])
 
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ from rv.utils.batch import _batch_submit
 from rv.detection.commands.settings import temp_root_dir
 
 
-def make_predict_array_cmd(inference_graph_uri, label_map_uri, projects_uri
+def make_predict_array_cmd(inference_graph_uri, label_map_uri, projects_uri,
                            output_dir_uri):
     return 'python -m rv.detection.run predict_array {} {} {} {}'.format(
         inference_graph_uri, label_map_uri, projects_uri, output_dir_uri)
@@ -16,13 +16,13 @@ def make_predict_array_cmd(inference_graph_uri, label_map_uri, projects_uri
 
 def make_merge_predictions_cmd(projects_uri, output_dir_uri):
     return 'python -m rv.detection.run merge_predictions {} {}'.format(
-        projects_uri, output_uri)
+        projects_uri, output_dir_uri)
 
 
 def get_nb_images(projects):
     nb_images = 0
     for project in projects:
-        nb_images += len(projects['images'])
+        nb_images += len(project['images'])
     return nb_images
 
 

@@ -114,8 +114,9 @@ def train(config_uri, train_dataset_uri, val_dataset_uri, model_checkpoint_uri,
         # After training finishes due to num_steps exceeded,
         # kill monitor processes, export inference graph, and upload.
         train_process.wait()
-        eval_process.wait()
-        tensorboard_process.wait()
+        print('training done')
+        eval_process.kill()
+        tensorboard_process.kill()
         '''
         export_inference_graph(
             train_root_dir, config_path, inference_graph_path)

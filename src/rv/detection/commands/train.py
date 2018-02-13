@@ -117,6 +117,7 @@ def train(config_uri, train_dataset_uri, val_dataset_uri, model_checkpoint_uri,
         print('training done')
         eval_process.kill()
         tensorboard_process.kill()
+        print('other processes killed')
         '''
         export_inference_graph(
             train_root_dir, config_path, inference_graph_path)

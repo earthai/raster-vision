@@ -31,23 +31,22 @@ def merge_predictions(projects_uri, output_dir_uri, save_temp):
         # For each project:
         # download the predictions files, merge them, and upload the merged
         # predictions.
-        with open(projects_path, 'r') as projects_file:
-            projects = json.load(projects_file)
-            for project in enumerate(projects):
-                predictions_list = []
-                for image_ind, image in enumerate(project['images']):
-                    predictions_uri = os.path.join(
-                        output_dir_uri, project['id'],
-                        '{}.json'.format(image_ind))
-                    predictions_path = download_if_needed(
-                        predictions_uri, temp_dir)
-                    predictions_list.append(json.load(open(predictions_path)))
+        projects = json.load(open(projects_path))
+        for project in projects:
+            predictions_list = []
+            for image_ind, image in enumerate(project['images']):
+                predictions_uri = os.path.join(
+                    output_dir_uri, project['id'],
+                    '{}.json'.format(image_ind))
+                predictions_path = download_if_needed(
+                    predictions_uri, temp_dir)
+                predictions_list.append(json.load(open(predictions_path)))
 
-                output_uri = project['annotations']
-                output_path = get_local_path(output_uri, temp_dir)
-                predictions = merge_predictions(predictions_list)
-                json.dump(predictions, open(output_path, 'w'))
-                upload_if_needed(output_path, output_uri)
+            output_uri = project['annotations']
+            output_path = get_local_path(output_uri, temp_dir)
+            predictions = merge_predictions(predictions_list)
+            json.dump(predictions, open(output_path, 'w'))
+            upload_if_needed(output_path, output_uri)
 
 
 if __name__ == '__main__':

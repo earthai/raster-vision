@@ -11,7 +11,7 @@ from rv.utils.files import (
     MyTemporaryDirectory)
 
 
-def merge_predictions(predictions_list):
+def _merge_predictions(predictions_list):
     merged_predictions = copy.deepcopy(predictions_list[0])
     for predictions in predictions_list[1:]:
         merged_predictions['features'].extend(predictions['features'])
@@ -44,7 +44,7 @@ def merge_predictions(projects_uri, output_dir_uri, save_temp):
 
             output_uri = project['annotations']
             output_path = get_local_path(output_uri, temp_dir)
-            predictions = merge_predictions(predictions_list)
+            predictions = _merge_predictions(predictions_list)
             json.dump(predictions, open(output_path, 'w'))
             upload_if_needed(output_path, output_uri)
 

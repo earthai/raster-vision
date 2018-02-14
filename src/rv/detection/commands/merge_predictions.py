@@ -11,11 +11,11 @@ from rv.utils.files import (
     MyTemporaryDirectory)
 
 
-def merge_predictions(predictions_list, ):
-    all_annotations = copy.deepcopy(predictions_list[0])
+def merge_predictions(predictions_list):
+    merged_predictions = copy.deepcopy(predictions_list[0])
     for predictions in predictions_list[1:]:
-        all_annotations['features'].extend(annotations['features'])
-    return all_annotations
+        merged_predictions['features'].extend(predictions['features'])
+    return merged_predictions
 
 
 @click.command()
